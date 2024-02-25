@@ -1,34 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.layout')
+@section('crumb', 'Mata Pelajaran')
+@section('crumb1', 'Dashboard')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Subject</title>
-</head>
+@section('sidebar')
+    <aside id="sidebar" class="sidebar">
 
-<body>
-    <h1>MATA PELAJARAN</h1>
-    <a href="{{ route('subject.create') }}">Tambah Mapel</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Mapel</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($subjects as $subject)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $subject->name_subject }}</td>
-                    <td><a href="{{route('subject.show', $subject->id)}}">Detail</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
+        <ul class="sidebar-nav" id="sidebar-nav">
 
-</html>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('present.index') }}">
+                    <i class="bi bi-book"></i>
+                    <span>Presensi</span>
+                </a>
+            </li><!-- End Presensi Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('teacher.index') }}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Guru</span>
+                </a>
+            </li><!-- End Guru Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('subject.index') }}">
+                    <i class="bi bi-people"></i>
+                    <span>Mapel</span>
+                </a>
+            </li><!-- End Mapel Nav -->
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+@endsection
+
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="card-title">Data Mata Pelajaran</h5>
+                </div>
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <a href="{{ route('subject.create') }}" type="button" class="btn btn-primary"><i class="bi bi-plus me-1"></i> Tambah</a>
+                </div>
+            </div>
+
+            <!-- Table with stripped rows -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama Mata Pelajaran</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($subjects as $subject)
+                        <tr>
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{$subject->name_subject}}</td>
+                            <td><a href="{{route('subject.show', $subject->id)}}" type="button" class="btn btn-warning">Detail</a></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+@endsection

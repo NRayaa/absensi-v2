@@ -55,8 +55,11 @@ class TeacherController extends Controller
         $teacherDetail = Teacher::find($id);
         $teacherName = Teacher::find($id)->name_teacher;
         $teacherPresent = Present::where('teacher_p', $teacherName)->get();
+        $present = $teacherPresent->where('attend_p', 'Hadir')->count();
+        $absent = $teacherPresent->where('attend_p', 'Tidak hadir')->count();
+
         // dd($teacherName);
-        return view('teacher.show', compact('teacherDetail', 'teacherName', 'teacherPresent'));
+        return view('teacher.show', compact('teacherDetail', 'teacherName', 'teacherPresent', 'present', 'absent'));
     }
 
     /**

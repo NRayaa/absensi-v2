@@ -1,47 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Present Detail</title>
-</head>
-<body>
-    <a href="{{route('present.index')}}">Kembali</a>
-        <table>
-            <tr>
-                <td>Nama : </td>
-                <td>{{$detailPresent->teacher_p}}</td>
-            </tr>
-            <tr>
-                <td>Kehadiran : </td>
-                <td>{{$detailPresent->attend_p}}</td>
-            </tr>
-            <tr>
-                <td>Kelas : </td>
-                <td>{{$detailPresent->class_p}}</td>
-            </tr>
-            <tr>
-                <td>Pertemuan Ke : </td>
-                <td>{{$detailPresent->meet_p}}</td>
-            </tr>
-            <tr>
-                <td>Tanggal : </td>
-                <td>{{$detailPresent->date_p}}</td>
-            </tr>
-            <tr>
-                <td>Mapel : </td>
-                <td>{{$detailPresent->subject_p}}</td>
-            </tr>
-            <tr>
-                <td>Topik : </td>
-                <td>{{$detailPresent->topic_p}}</td>
-            </tr>
-            <tr>
-                <td>Jumlah Murid : </td>
-                <td>{{$detailPresent->student_p}}</td>
-            </tr>
-        </table>
-        {{-- <a href="{{route('present.edit', $detailPresent->id)}}">Edit</a> --}}
-</body>
-</html>
+@extends('layouts.layout')
+@section('crumb', 'Presensi')
+@section('crumb1', 'Dashboard')
+
+@section('sidebar')
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('present.index') }}">
+                    <i class="bi bi-book"></i>
+                    <span>Presensi</span>
+                </a>
+            </li><!-- End Presensi Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('teacher.index') }}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Guru</span>
+                </a>
+            </li><!-- End Guru Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('subject.index') }}">
+                    <i class="bi bi-people"></i>
+                    <span>Mapel</span>
+                </a>
+            </li><!-- End Mapel Nav -->
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+@endsection
+
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Detail Presensi</h5>
+
+            <!-- Default Table -->
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nama Guru</th>
+                        <td>{{$detailPresent->teacher_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Kehadiran</th>
+                        <td>{{$detailPresent->attend_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Kelas</th>
+                        <td>{{$detailPresent->class_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Pertemuan Ke-</th>
+                        <td>{{$detailPresent->meet_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tanggal</th>
+                        <td>{{$detailPresent->date_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Mapel</th>
+                        <td>{{$detailPresent->subject_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Topik</th>
+                        <td>{{$detailPresent->topic_p}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Jumlah Murid</th>
+                        <td>{{$detailPresent->student_p}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- End Default Table Example -->
+        </div>
+    </div>
+@endsection
