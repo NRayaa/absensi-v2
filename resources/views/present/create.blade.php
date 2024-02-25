@@ -1,74 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Present Create</title>
-</head>
-<body>
-    <a href="{{route('present.index')}}">Kembali</a>
-    <form action="{{route('present.store')}}" method="post">
-        @csrf
-        <table>
-            <tr>
-                <td>Nama : </td>
-                <td>
-                    <select name="teacher_p" id="">
-                        @foreach ($dataTeacher as $teacher)
-                            <option value="{{$teacher->name_teacher}}">{{$teacher->name_teacher}}"></option>
-                        @endforeach
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Kehadiran : </td>
-                <td>
-                    <select name="attend_p" id="">
-                        <option value="Hadir">Hadir</option>
-                        <option value="Tidak hadir">Tidak Hadir</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Kelas : </td>
-                <td>
-                    <select name="class_p" id="">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Pertemuan Ke : </td>
-                <td><input type="number" name="meet_p" id=""></td>
-            </tr>
-            <tr>
-                <td>Tanggal : </td>
-                <td><input type="date" name="date_p" id=""></td>
-            </tr>
-            <tr>
-                <td>Mapel : </td>
-                <td>
-                    <select name="subject_p" id="">
-                        @foreach ($dataSubject as $subject)
-                            <option value="{{$subject->name_subject}}">{{$subject->name_subject}}</option>
-                        @endforeach
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Topik : </td>
-                <td><input type="text" name="topic_p" id=""></td>
-            </tr>
-            <tr>
-                <td>Jumlah Murid : </td>
-                <td><input type="number" name="student_p" id=""></td>
-            </tr>
-        </table>
+@extends('layouts.layout')
+@section('crumb', 'Presensi')
+@section('crumb1', 'Dashboard')
 
-        <button type="submit">Buat Presensi</button>
-    </form>
-</body>
-</html>
+@section('sidebar')
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('present.index') }}">
+                    <i class="bi bi-book"></i>
+                    <span>Presensi</span>
+                </a>
+            </li><!-- End Presensi Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('teacher.index') }}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Guru</span>
+                </a>
+            </li><!-- End Guru Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('subject.index') }}">
+                    <i class="bi bi-people"></i>
+                    <span>Mapel</span>
+                </a>
+            </li><!-- End Mapel Nav -->
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+@endsection
+
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Form Buat Presensi</h5>
+
+            <!-- General Form Elements -->
+            <form action="{{ route('present.store') }}" method="post">
+                @csrf
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Nama Guru</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" name="teacher_p" aria-label="Default select example">
+                            @foreach ($dataTeacher as $teacher)
+                                <option value="{{ $teacher->name_teacher }}">{{ $teacher->name_teacher }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Kehadiran</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" name="attend_p" aria-label="Default select example">
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak hadir">Tidak Hadir</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Kelas : </label>
+                    <div class="col-sm-10">
+                        <select class="form-select" name="class_p" aria-label="Default select example">
+                            <option value="Kelas 10 A">Kelas 10 A</option>
+                            <option value="Kelas 10 B">Kelas 10 B</option>
+                            <option value="Kelas 11 A">Kelas 11 A</option>
+                            <option value="Kelas 11 B">Kelas 11 B</option>
+                            <option value="Kelas 12 A">Kelas 12 A</option>
+                            <option value="Kelas 12 B">Kelas 12 B</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Pertemuan Ke</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="meet_p">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="date_p">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Mata Pelajaran</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" name="subject_p" aria-label="Default select example">
+                            @foreach ($dataSubject as $subject)
+                                <option value="{{ $subject->name_subject }}">{{ $subject->name_subject }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Topik Pembahasan</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="topic_p">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Jumlah Murid Hadir</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="student_p">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12 d-flex justify-content-end align-items-center">
+                        <button type="submit" class="btn btn-primary">Buat Presensi</button>
+                    </div>
+                </div>
+
+            </form><!-- End General Form Elements -->
+
+        </div>
+    </div>
+@endsection
