@@ -1,6 +1,8 @@
 @extends('layouts.layout')
 @section('crumb', 'Mata Pelajaran')
 @section('crumb1', 'Dashboard')
+@section('name', $name)
+@section('role', $role)
 
 @section('sidebar')
     <aside id="sidebar" class="sidebar">

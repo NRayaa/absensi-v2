@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Present;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -13,8 +15,10 @@ class TeacherController extends Controller
      */
     public function index()
     {
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
         $teachers = Teacher::all();
-        return view('teacher.index', compact('teachers'));
+        return view('teacher.index', compact('teachers', 'name', 'role'));
     }
 
     /**
@@ -22,7 +26,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create');
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
+        return view('teacher.create', compact('name', 'role'));
     }
 
     /**
@@ -31,11 +37,20 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name_teacher'=>'required'
+            'name_teacher'=>'required',
+            'email_teacher'=>'required',
+            'password_teacher'=>'required',
         ]);
 
         $response = Teacher::create([
             'name_teacher' => $request->name_teacher,
+        ]);
+
+        User::create([
+            'name' => $request->name_teacher,
+            'email' => $request->email_teacher,
+            'password' => bcrypt($request->password_teacher),
+            'role' => 'guru',
         ]);
 
         if ($response) {
@@ -51,7 +66,8 @@ class TeacherController extends Controller
     public function show(string $id)
     {
 
-
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
         $teacherDetail = Teacher::find($id);
         $teacherName = Teacher::find($id)->name_teacher;
         $teacherPresent = Present::where('teacher_p', $teacherName)->get();
@@ -59,7 +75,7 @@ class TeacherController extends Controller
         $absent = $teacherPresent->where('attend_p', 'Tidak hadir')->count();
 
         // dd($teacherName);
-        return view('teacher.show', compact('teacherDetail', 'teacherName', 'teacherPresent', 'present', 'absent'));
+        return view('teacher.show', compact('teacherDetail', 'teacherName', 'teacherPresent', 'present', 'absent', 'name', 'role'));
     }
 
     /**
@@ -68,7 +84,9 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         $teacherDetail = Teacher::find($id);
-        return view('teacher.edit', compact('teacherDetail'));
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
+        return view('teacher.edit', compact('teacherDetail', 'name', 'role'));
 
     }
 

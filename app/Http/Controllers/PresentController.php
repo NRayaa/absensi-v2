@@ -6,6 +6,7 @@ use App\Models\Present;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PresentController extends Controller
 {
@@ -14,8 +15,11 @@ class PresentController extends Controller
      */
     public function index()
     {
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
+
         $presents = Present::all();
-        return view('present.index', compact('presents'));
+        return view('present.index', compact('presents', 'name', 'role'));
     }
 
     /**
@@ -25,8 +29,10 @@ class PresentController extends Controller
     {
         $dataSubject = Subject::all();
         $dataTeacher = Teacher::all();
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
 
-        return view('present.create', compact('dataSubject', 'dataTeacher'));
+        return view('present.create', compact('dataSubject', 'dataTeacher', 'name', 'role'));
     }
 
     /**
@@ -64,8 +70,10 @@ class PresentController extends Controller
      */
     public function show(string $id)
     {
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
         $detailPresent = Present::find($id);
-        return view('present.show', compact('detailPresent'));
+        return view('present.show', compact('detailPresent', 'name', 'role'));
     }
 
     /**
@@ -74,7 +82,9 @@ class PresentController extends Controller
     public function edit(string $id)
     {
         $detailPresent = Present::find($id);
-        return view('present.edit', compact('detailPresent'));
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
+        return view('present.edit', compact('detailPresent', 'name', 'role'));
     }
 
     /**

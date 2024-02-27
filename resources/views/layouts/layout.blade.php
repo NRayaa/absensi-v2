@@ -10,8 +10,8 @@
       <meta content="" name="keywords">
 
       <!-- Favicons -->
-      <link href="assets/img/favicon.png" rel="icon">
-      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+      {{-- <link href="assets/img/favicon.png" rel="icon">
+      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
 
       <!-- Google Fonts -->
       <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -60,14 +60,14 @@
 
                       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                           data-bs-toggle="dropdown">
-                          <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                          <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                          {{-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
+                          <span class="d-none d-md-block dropdown-toggle ps-2">@yield('name')</span>
                       </a><!-- End Profile Iamge Icon -->
 
                       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                           <li class="dropdown-header">
-                              <h6>Kevin Anderson</h6>
-                              <span>Web Designer</span>
+                              <h6>@yield('name')</h6>
+                              <span>@yield('role')</span>
                           </li>
 
                           <li>
@@ -116,7 +116,7 @@
               <!-- You can delete the links only if you purchased the pro version. -->
               <!-- Licensing information: https://bootstrapmade.com/license/ -->
               <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              Designed by <a href="https://instagram.com/an.syiha">AS</a>
           </div>
       </footer><!-- End Footer -->
 

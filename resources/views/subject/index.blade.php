@@ -1,6 +1,8 @@
 @extends('layouts.layout')
 @section('crumb', 'Mata Pelajaran')
 @section('crumb1', 'Dashboard')
+@section('name', $name)
+@section('role', $role)
 
 @section('sidebar')
     <aside id="sidebar" class="sidebar">
@@ -66,7 +68,7 @@
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{$subject->name_subject}}</td>
-                            <td><a href="{{route('subject.show', $subject->id)}}" type="button" class="btn btn-warning">Detail</a></td>
+                            <td><a href="{{route('subject.edit', $subject->id)}}" type="button" class="btn btn-warning">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>
