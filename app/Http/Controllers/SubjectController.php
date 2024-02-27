@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
@@ -12,8 +13,12 @@ class SubjectController extends Controller
      */
     public function index()
     {
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
         $subjects = Subject::all();
-        return view('subject.index', compact('subjects'));
+
+        // dd($role);
+        return view('subject.index', compact('subjects', 'name', 'role'));
     }
 
     /**
@@ -21,7 +26,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('subject.create');
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
+        return view('subject.create', compact('name', 'role'));
     }
 
     /**
@@ -46,8 +53,10 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
         $subjectDetail = Subject::find($id);
-        return view('subject.show', compact('subjectDetail'));
+        return view('subject.show', compact('subjectDetail', 'name', 'role'));
     }
 
     /**
@@ -55,8 +64,10 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
+        $name = Auth::user()->name;
+        $role = Auth::user()->role;
         $subjectDetail = Subject::find($id);
-        return view('subject.edit', compact('subjectDetail'));
+        return view('subject.edit', compact('subjectDetail', 'name', 'role'));
     }
 
     /**

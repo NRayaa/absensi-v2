@@ -1,6 +1,8 @@
 @extends('layouts.layout')
 @section('crumb', 'Dashboard')
 @section('crumb1', 'Dashboard')
+@section('name', '{{$name}}')
+@section('role', '{{$role}}')
 
 @section('sidebar')
 <aside id="sidebar" class="sidebar">
@@ -22,7 +24,7 @@
         </li><!-- End Presensi Nav -->
 
         <li class="nav-item">
-            <a class="nav-link " href="{{route('teacher.index')}}">
+            <a class="nav-link collapsed" href="{{route('teacher.index')}}">
                 <i class="bi bi-person-circle"></i>
                 <span>Guru</span>
             </a>
